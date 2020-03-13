@@ -11,22 +11,36 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-public class WordCount {
+public class TypeCount {
 
   public static class TokenizerMapper
        extends Mapper<Object, Text, Text, IntWritable>{
 
     private final static IntWritable one = new IntWritable(1);
-    private Text word = new Text();
+    private Text type = new Text();
 
     public void map(Object key, Text value, Context context
                     ) throws IOException, InterruptedException {
       StringTokenizer itr = new StringTokenizer(value.toString());
       while (itr.hasMoreTokens()) {
-        if(!token.contains(".")){
-			token = token.replaceAll("[^a-zA-Z0-9'-]", "");
-            word.set(token);
-            context.write(word, one);
+        String token = itr.nextToken();
+        for(Character element : token.toCharArray()){
+                if(element.toString().matches("[A-Z]")){
+                        type.set("Uppercase letters");
+                        context.write(type, one);
+                }
+                else if(element.toString().matches("[a-z]")){
+                        type.set("Lowercase letters");
+                        context.write(type, one);
+                }
+                else if(element.toString().matches("[0-9]")){
+                        type.set("Numbers");
+                        context.write(type, one);
+                }
+                else{
+                        type.set("Special characters");
+                        context.write(type, one);
+                }
         }
       }
     }

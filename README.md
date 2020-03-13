@@ -3,9 +3,8 @@ Initialization repo for assignment 2
 
 ## Blog post
 
-+ [assignment 2 blogpost](PLACEHOLDER).
++ [assignment 2 blogpost](https://rubigdata.github.io/big-data-blog-2020-dgirzadas/hadoop.html).
 
-Remember to update this README file with a link to the published blog post when you are done!
 
 ## The assignment
 
